@@ -1,5 +1,5 @@
+import { getCustomRepository } from 'typeorm';
 import { UsersRepository } from "../repositories/UsersRepository"
-
 interface IUserRequest {
   name: string;
   email: string;
@@ -8,8 +8,8 @@ interface IUserRequest {
 
 class CreateUserService {
 
-  async create({ name, email, admin }: IUserRequest) {
-    const usersRepository = new UsersRepository();
+  async execute({ name, email, admin }: IUserRequest) {
+    const usersRepository = getCustomRepository(UsersRepository);
 
     if (!email) {
       throw new Error('Email is required')
