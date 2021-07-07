@@ -18,7 +18,9 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
     const { sub } = verify(token,'7c6df2e38194ec7c64ac56152d961939') as Payload;
 
     request.user_id = sub;
+    
     return next();
+
   } catch (err) {
     return response.status(401).end();
   }
